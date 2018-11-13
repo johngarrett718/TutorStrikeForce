@@ -1,0 +1,22 @@
+﻿@using TutorStrikeForce.ViewModels
+@model SalesByClientSummaryViewModel
+
+<table>
+    <thead>
+        <tr>
+            <td>City Location</td>
+            <td>Client Name</td>
+            <td>Percentage</td>
+            <td>Hours</td>
+        </tr>
+        @foreach(SalesByClientViewModel sale in Model.SalesByClient)
+        {
+            <tr>
+                <td>@sale.ClientCity</td>
+                <td>@sale.ClientName</td>
+                <td>@sale.PercentageOfSale</td>
+                <td>@sale.Hours</td>
+            </tr>
+        }
+    </thead>
+</table>

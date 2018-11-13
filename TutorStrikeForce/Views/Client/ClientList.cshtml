@@ -1,0 +1,25 @@
+﻿@using TutorStrikeForce.Models
+@model TutorStrikeForce.ViewModels.ClientViewModel
+
+<div>
+    <button id="addClientBtn" class="primaryButton add-button" onclick='location.href="@Url.Action("Create", "Client")"'>Add Client</button>
+    @foreach (Client client in Model.Clients)
+    {
+        <article class="list-view">
+            <div class="labels">
+                <p>Name:</p>
+                <p>City:</p>
+                <p>Hours:</p>
+            </div>
+            <div class="values">
+                <p>@($"{client.FirstName} {client.LastName}")</p>
+                <p>@client.City</p>
+                <p>@client.Hours</p>
+            </div>
+            <div class="actions">
+                <a asp-action="Update" asp-controller="Client" asp-route-clientId="@client.ClientId"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" asp-controller="Client" asp-route-clientId="@client.ClientId"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </article>
+    }
+</div>

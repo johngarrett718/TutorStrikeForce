@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <header>
+        <nav class="top-menu">
+            <h1>TUTOR STRIKE FORCE</h1>
+            <a asp-controller="Client" asp-action="ClientList">Clients</a>
+            <a asp-controller="SalesRep" asp-action="SalesRepList">Sales Reps</a>
+            <a asp-controller="Sale" asp-action="Index">Sales</a>
+            <partial name="_LoginPartial" />
+        </nav>
+    </header>
+    <div class="wrapper">
+        @RenderBody()
+    </div>
+    <footer>
+        @RenderSection("footer", required: false)
+        @*<vc:greeter></vc:greeter>
+            <vc:login-logout></vc:login-logout>*@
+        @*@if (User.Identity.IsAuthenticated)
+            {
+                foreach(var identity in User.Identities)
+                {
+
+                    <h3>@identity.Name</h3>
+                    <ul>
+                        @foreach(var claim in identity.Claims)
+                        {
+                            <li>@claim.Type - @claim.Value</li>
+                        }
+                    </ul>
+                }
+            }
+            else
+            {
+                <div>You are anonymous</div>
+            }*@
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="~/js/scripts.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿@using TutorStrikeForce.Models
+@model TutorStrikeForce.ViewModels.SalesRepViewModel
+
+<div>
+    <button id="addSalesRepBtn" class="primaryButton add-button" onclick='location.href="@Url.Action("Create", "SalesRep")"'>Add Sales Rep</button>
+    @foreach (SalesRep salesrep in Model.SalesReps)
+    {
+        <article class="list-view">
+            <div class="labels">
+                <p>Name:</p>
+
+            </div>
+            <div class="values">
+                <p>@($"{salesrep.FirstName} {salesrep.LastName}")</p>
+
+            </div>
+            <div class="actions">
+                <a asp-action="Update" asp-controller="SalesRep" asp-route-salesrepId="@salesrep.SalesRepId"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" asp-controller="SalesRep" asp-route-salesrepId="@salesrep.SalesRepId"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </article>
+    }
+</div>
+</table>

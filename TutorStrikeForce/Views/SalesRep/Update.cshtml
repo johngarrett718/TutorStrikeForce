@@ -1,0 +1,18 @@
+﻿@using TutorStrikeForce.ViewModels
+@model SalesRepEditModel
+
+<form asp-action="Update" asp-route-salesRepId="@Model.SalesRepId" method="post">
+    <div class="input-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span class="validation-error" asp-validation-for="FirstName"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span class="validation-error" asp-validation-for="LastName"></span>
+    </div>
+
+    <input class="primaryButton" type="submit" name="save" value="Save" />
+</form>

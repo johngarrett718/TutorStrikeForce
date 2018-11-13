@@ -1,0 +1,89 @@
+﻿@using TutorStrikeForce.ViewModels
+@model SaleEditModel
+
+<form asp-action="Create" method="post">
+    @for (var i = 0; i < Model.Clients.Count; i++)
+    {
+        <text>
+            <input type="hidden" name="clients.Index" value="@i" />
+            <input type="hidden" name="clients[@i].Text" value="@Model.Clients[i].Text" />
+            <input type="hidden" name="clients[@i].Value" value="@Model.Clients[i].Value" />
+        </text>
+    }
+    @for (var i = 0; i < Model.SalesReps.Count; i++)
+    {
+        <text>
+            <input type="hidden" name="salesReps.Index" value="@i" />
+            <input type="hidden" name="salesReps[@i].Text" value="@Model.SalesReps[i].Text" />
+            <input type="hidden" name="salesReps[@i].Value" value="@Model.SalesReps[i].Value" />
+        </text>
+    }
+
+    <div class="input-group">
+        <label asp-for="OpenerSalesRepId"></label>
+        <select class="month-select" asp-for="OpenerSalesRepId" asp-items="Model.SalesReps">
+            <option selected disabled></option>
+        </select>
+        <span class="validation-error" asp-validation-for="OpenerSalesRepId"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="CloserSalesRepId"></label>
+        <select class="month-select" asp-for="CloserSalesRepId" asp-items="Model.SalesReps">
+            <option selected disabled></option>
+        </select>
+        <span class="validation-error" asp-validation-for="CloserSalesRepId"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="Client.Email"></label>
+        <div class="inlineElements">
+            <input type="email" asp-for="Client.Email" />
+            <i id="clientExistsIcon" class="valid hidden fas fa-check"></i>
+            <i id="clientNotExistsIcon" class="invalid hidden fas fa-exclamation"></i>
+        </div>
+        <input type="hidden" asp-for="Client.ClientId" />
+        <div id="clientExists" class="hidden">EXISTS</div>
+        <div id="clientNew" class="hidden">NEW</div>
+    </div>
+
+    <div>
+        <div class="inline-input-group">
+            <label asp-for="Client.FirstName"></label>
+            <input asp-for="Client.FirstName" />
+            <span class="validation-error" asp-validation-for="Client.FirstName"></span>
+        </div>
+
+        <div class="inline-input-group">
+            <label asp-for="Client.LastName"></label>
+            <input asp-for="Client.LastName" />
+            <span class="validation-error" asp-validation-for="Client.LastName"></span>
+        </div>
+
+        <div class="inline-input-group">
+            <label asp-for="Client.City"></label>
+            <input asp-for="Client.City" />
+            <span class="validation-error" asp-validation-for="Client.City"></span>
+        </div>
+
+        <div class="inline-input-group">
+            <label asp-for="Client.Hours"></label>
+            <input type="number" step="0.01" asp-for="Client.Hours" />
+            <span class="validation-error" asp-validation-for="Client.Hours"></span>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="Hours"></label>
+        <input type="number" step="0.5" asp-for="Hours" />
+        <span class="validation-error" asp-validation-for="Hours"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="SoldDate"></label>
+        <input step="5" asp-for="SoldDate" />
+        <span class="validation-error" asp-validation-for="SoldDate"></span>
+    </div>
+
+    <input class="primaryButton" type="submit" name="save" value="Save" />
+</form>

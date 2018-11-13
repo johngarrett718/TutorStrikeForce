@@ -1,0 +1,59 @@
+﻿@using TutorStrikeForce.Models
+@using TutorStrikeForce.Helpers;
+@model TutorStrikeForce.ViewModels.SalesSummaryViewModel
+<div>
+    <h1>Sales per Day by Director in @($"{DateTimeHelper.GetMonthNameFromNumber(Model.Month)} {Model.Year}")</h1>
+
+    <div class="inlineElements calculate-sales">
+        <p>Month for sales per day</p>
+        <form method="get" asp-action="Index">
+            <select class="month-select" name="month" id="month" asp-for="Month" asp-items="Model.MonthYearOptions"></select>
+            <input class="primaryButton" type="submit" value="RE-CALCULATE" />
+        </form>
+        <form method="get" asp-action="Create">
+            <input class="primaryButton" type="submit" value="ADD SALE" />
+        </form>
+
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                @foreach (SalesRep salesRep in Model.SalesReps)
+                {
+                    <th>@salesRep.FullName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int dayOfMonth = 1; dayOfMonth <= DateTime.DaysInMonth(Model.Year, Model.Month); dayOfMonth++)
+            {
+                <tr>
+                    <td>@($"{DateTimeHelper.GetAbbreviatedMonthNameFromNumber(Model.Month)} {dayOfMonth}")</td>
+                    @foreach (SalesRep salesRep in Model.SalesReps)
+                    {
+                        <td>
+                            @if (salesRep.GetSalesByDayOfMonth(dayOfMonth).Sum(sale => sale.Hours) > 0)
+                            {
+                                @salesRep.GetSoldHoursByDayOfMonth(dayOfMonth)<br />
+                                <a href="/" class="saleList" data-day="@dayOfMonth" data-month="@Model.Month" data-monthAbbr="@DateTimeHelper.GetAbbreviatedMonthNameFromNumber(Model.Month)"
+                                   data-salesRepId="@salesRep.SalesRepId">(@salesRep.GetSalesByDayOfMonth(dayOfMonth).Count())</a>
+                            }
+                        </td>
+                    }
+                </tr>
+
+            }
+            <tr>
+                <td>Total Hours</td>
+                @foreach(SalesRep salesRep in Model.SalesReps)
+                {
+                    <td>@salesRep.Sales.Sum(s => s.Hours)</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <div id="dialog" title="">
+
+    </div>    
+</div>
